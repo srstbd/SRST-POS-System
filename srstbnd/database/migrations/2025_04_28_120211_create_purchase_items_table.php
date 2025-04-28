@@ -17,7 +17,20 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('quantity');//integer
             $table->decimal('unit_cost', 10, 2);//decimal
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('deleted_by')->constrained('users')->onDelete('cascade');
+            $table->softDeletes('deleted_at'); // deleted_at
+            $table->string('created_by_ip', 45)->nullable();
+            $table->string('updated_by_ip', 45)->nullable();
+            $table->string('deleted_by_ip', 45)->nullable();
+            $table->boolean('status')->default(1)->comment('0: inactive, 1: active');
             $table->timestamps(); // created_at, updated_at
+
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
+            $table->softDeletes('deleted_at')->nullable();
         });
     }
 
