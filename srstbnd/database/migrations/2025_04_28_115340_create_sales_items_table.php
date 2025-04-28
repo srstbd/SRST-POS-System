@@ -18,6 +18,11 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('unit_price', 10, 2);//decimal
             $table->decimal('total_price', 10, 2);//decimal
+            $table->softDeletes('deleted_at'); // deleted_at
+            $table->string('created_by_ip', 45)->nullable();
+            $table->string('updated_by_ip', 45)->nullable();
+            $table->string('deleted_by_ip', 45)->nullable();
+            $table->boolean('status')->default(1)->comment('0: inactive, 1: active');
             $table->timestamps();
         });
     }

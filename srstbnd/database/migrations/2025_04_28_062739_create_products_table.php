@@ -22,6 +22,11 @@ return new class extends Migration
             $table->decimal('cost', 8,2);// (decimal)
             $table->integer('stock_quantity');// (integer)
             $table->longText('description')->nullable();// (text, nullable)
+            $table->softDeletes('deleted_at'); // deleted_at
+            $table->string('created_by_ip', 45)->nullable();
+            $table->string('updated_by_ip', 45)->nullable();
+            $table->string('deleted_by_ip', 45)->nullable();
+            $table->boolean('status')->default(1)->comment('0: inactive, 1: active');
             $table->timestamps();
         });
     }

@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('invoice_no');//string 
             $table->decimal('total_cost', 10, 2);//decimal
             $table->timestamp('purchase_date');
+            $table->softDeletes('deleted_at'); // deleted_at
+            $table->string('created_by_ip', 45)->nullable();
+            $table->string('updated_by_ip', 45)->nullable();
+            $table->string('deleted_by_ip', 45)->nullable();
+            $table->boolean('status')->default(1)->comment('0: inactive, 1: active');
             $table->timestamps(); // created_at and updated_at
         });
     }
